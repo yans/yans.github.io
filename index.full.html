@@ -32,7 +32,7 @@
 
       /* TEXT */
 
-      .header-text {
+      header h1 {
         color: #111;
         display: inline-block;
         font-family: helvetica neue,helvetica,sans-serif;
@@ -43,7 +43,7 @@
         text-transform: uppercase;
       }
 
-      .body-text {
+      .content p {
         color: #111;
         display: inline-block;
         font-family: helvetica neue,helvetica,sans-serif;
@@ -55,7 +55,7 @@
         text-transform: uppercase;
       }
 
-      .footer-text {
+      footer span {
         color: #111;
         display: inline-block;
         font-family: helvetica neue,helvetica,sans-serif;
@@ -78,11 +78,12 @@
       }
 
       button {
-        border: none;
         background: none;
-        padding: 0;
+        border: none;
         font-size: 1em;
-        line-height: 2em;
+        letter-spacing: -0.05em;
+        margin: 0 0 0 -0.5em;
+        padding: 0;
       }
 
       button:hover {
@@ -94,7 +95,6 @@
       }
 
       code {
-        background-color: #fdf6e3;
         font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
       }
 
@@ -119,27 +119,26 @@
     <article>
       <div class="content">
         <header>
-          <h1 class="header-text">Yan Sun</h1>
+          <h1>Yan Sun</h1>
         </header>
-        <p class="body-text">
+        <p>
           Product Engineer at <a class="pinterest" href="https://www.pinterest.com">Pinterest</a></br>
-          Email <button><code><span class="punctuation">`</span><span class="string">contact@</span><span class="punctuation">${</span><span class="code">window.location.hostname</span><span class="punctuation">}</span><span class="punctuation">`</span></code></button></br>
+          Email <button><code><span class="punctuation">`</span><span class="string">contact@</span><span class="punctuation">${</span><span class="code">location.hostname</span><span class="punctuation">}</span><span class="punctuation">`</span></code></button></br>
           <a href="/resume.pdf">Resume</a> as of early 2019
         </p>
         <footer>
-          <span class="footer-text">Last updated: <a href="https://github.com/yans/yans.github.io/commit/master">January 2019</a></span>
+          <span>Last updated: <a href="https://github.com/yans/yans.github.io/commit/master">January 2019</a></span>
         </footer>
       </div>
     </article>
     <script type="text/javascript">
-      let button = document.querySelector("button");
-      button.addEventListener("click", () => {
-        let email = `contact@${window.location.hostname}`;
-        let anchor = document.createElement('a');
-        let anchorContent = document.createTextNode(email);
-        anchor.appendChild(anchorContent);
-        anchor.setAttribute('href', `mailto:${email}`);
-        button.parentNode.replaceChild(anchor, button);
+      let b = document.querySelector("button");
+      b.addEventListener("click", () => {
+        let e = `contact@${window.location.hostname}`;
+        let a = document.createElement('a');
+        a.appendChild(document.createTextNode(e));
+        a.setAttribute('href', `mailto:${e}`);
+        b.parentNode.replaceChild(a, b);
       });
     </script>
   </body>
