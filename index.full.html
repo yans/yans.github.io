@@ -49,7 +49,7 @@
         font-family: helvetica neue,helvetica,sans-serif;
         font-size: 1em;
         letter-spacing: 0.1em;
-        line-height: 2em;
+        line-height: 2.5em;
         margin: 16px 0px 16px 0px;
         text-rendering: optimizeLegibility;
         text-transform: uppercase;
@@ -80,9 +80,10 @@
       button {
         background: none;
         border: none;
-        font-size: 1em;
+        display: inline-block;
+        font-size: 0.8em;
         letter-spacing: -0.05em;
-        margin: 0 0 0 -0.5em;
+        margin: 0;
         padding: 0;
       }
 
@@ -95,11 +96,12 @@
       }
 
       code {
+        border-radius: 0 0.25em 0.25em 0;
         font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
       }
 
-      code:hover {
-        font-weight: bold;
+      code .function {
+        color: #586e75;
       }
 
       code .string {
@@ -113,6 +115,40 @@
       code .code {
         color: #657b83;
       }
+
+      #run-button {
+        background-color: #DDD;
+        border-radius: 0.25em 0 0 0.25em;
+        color: #111;
+        height: 28px;
+        margin-left: 0.25em;
+        padding: 0 0.25em 0 0.25em;
+      }
+
+      #code-button {
+        background-color: #fdf6e3;
+        border-radius: 0 0.25em 0.25em 0;
+        height: 28px;
+        max-height: 28px;
+        padding: 0 0.25em 0 0.25em;
+      }
+
+      #code-wrapper {
+        display: inline-block;
+      }
+      #code-wrapper:hover #run-button {
+        background-color: #AAA;
+        color: #fff;
+      }
+      #code-wrapper:hover #code-button {
+        background-color: #002b36;
+      }
+      #code-wrapper:hover code .code {
+        color: 839496;
+      }
+      #code-wrapper:hover code .function {
+        color: #93a1a1;
+      }
     </style>
   </head>
   <body style="background-color: #FAFAFA;">
@@ -123,8 +159,9 @@
         </header>
         <p>
           Product Engineer at <a class="pinterest" href="https://www.pinterest.com">Pinterest</a></br>
-          Email <button><code><span class="punctuation">`</span><span class="string">contact@</span><span class="punctuation">${</span><span class="code">location.hostname</span><span class="punctuation">}</span><span class="punctuation">`</span></code></button></br>
-          <a href="/resume.pdf">Resume</a> as of early 2019
+          <a href="/resume.pdf">Resume</a> as of early 2019<br>
+          Send emails to: <span id="code-wrapper"><button id="run-button"><span>&#x25b6;&#xFE0E; RUN</span></button><button id="code-button"><code><span class="punctuation">`</span><span class="string">contact@</span><span class="punctuation">${</span><span class="code">window.location.hostname</span><span class="punctuation">}</span><span class="punctuation">`</span>
+            </code></button></span>
         </p>
         <footer>
           <span>Last updated: <a href="https://github.com/yans/yans.github.io/commit/master">January 2019</a></span>
@@ -132,14 +169,18 @@
       </div>
     </article>
     <script type="text/javascript">
-      let b = document.querySelector("button");
-      b.addEventListener("click", () => {
+      let b = document.getElementById('code-button');
+      let rb = document.getElementById('run-button');
+      let onClick = function(f) {
         let e = `contact@${window.location.hostname}`;
         let a = document.createElement('a');
         a.appendChild(document.createTextNode(e));
         a.setAttribute('href', `mailto:${e}`);
         b.parentNode.replaceChild(a, b);
-      });
+        rb.remove();
+      };
+      b.addEventListener('click', onClick);
+      rb.addEventListener('click', onClick);
     </script>
   </body>
 </html>
