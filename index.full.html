@@ -78,6 +78,7 @@
 
       a:hover {
         color: #AAA;
+        cursor: pointer;
         text-decoration-color: #AAA;
       }
 
@@ -163,8 +164,8 @@
         </header>
         <p>
           Product Engineer at <a class="pinterest" href="https://www.pinterest.com">Pinterest</a></br>
-          <a href="/resume.pdf">Resume</a> as of early 2019<br>
-          Send emails to: <span id="code-wrapper"><button id="run-button"><span>&#x25b6;&#xFE0E; RUN</span></button><button id="code-button"><code><span class="punctuation">`</span><span class="string">contact@</span><span class="punctuation">${</span><span class="code">window.location.hostname</span><span class="punctuation">}</span><span class="punctuation">`</span>
+          <a href="/yan-sun-resume.pdf">Resume</a> as of early 2019<br>
+          Run code for <a id="email-button">email</a>: <span id="code-wrapper"><button id="run-button"><span>&#x25b6;&#xFE0E; RUN</span></button><button id="code-button"><code><span class="punctuation">`</span><span class="string">contact@</span><span class="punctuation">${</span><span class="code">window.location.hostname</span><span class="punctuation">}</span><span class="punctuation">`</span>
             </code></button></span>
         </p>
         <footer>
@@ -175,16 +176,22 @@
     <script type="text/javascript">
       let b = document.getElementById('code-button');
       let rb = document.getElementById('run-button');
+      let eb = document.getElementById('email-button');
       let onClick = function(f) {
         let e = `contact@${window.location.hostname}`;
         let a = document.createElement('a');
         a.appendChild(document.createTextNode(e));
         a.setAttribute('href', `mailto:${e}`);
+        let ea = document.createElement('a');
+        ea.appendChild(document.createTextNode('email'));
+        ea.setAttribute('href', `mailto:${e}`);
         b.parentNode.replaceChild(a, b);
+        eb.parentNode.replaceChild(ea, eb);
         rb.remove();
       };
       b.addEventListener('click', onClick);
       rb.addEventListener('click', onClick);
+      eb.addEventListener('click', onClick);
     </script>
   </body>
 </html>
