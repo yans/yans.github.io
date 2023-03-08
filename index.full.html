@@ -41,7 +41,7 @@
         display: inline-block;
         font-family: helvetica neue,helvetica,sans-serif;
         font-size: 3em;
-        font-weight: bold;
+        font-weight: 500;
         margin: 48px 0px 48px 0px;
         text-rendering: optimizeLegibility;
         text-transform: uppercase;
@@ -59,12 +59,17 @@
         text-transform: uppercase;
       }
 
-      footer span {
+      footer {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        margin: 48px 0px 48px 0px;
+      }
+
+      footer div {
         color: #111;
-        display: inline-block;
         font-family: helvetica neue,helvetica,sans-serif;
         font-size: 0.5em;
-        margin: 48px 0px 48px 0px;
       }
 
 
@@ -80,6 +85,26 @@
         color: #AAA;
         cursor: pointer;
         text-decoration-color: #AAA;
+      }
+
+      a.robinhood {
+        color: rgb(0,200,5);
+        text-decoration-color: rgb(0,200,5);
+      }
+
+      a.robinhood:hover {
+        color: rgb(0,180,5);
+        text-decoration-color: rgb(0,200,5);
+      }
+
+      a.party {
+        color: #EB334F;
+        text-decoration-color: #EB334F;
+      }
+
+      a.party:hover {
+        color: #e60023;
+        text-decoration-color: #e60023;
       }
 
       button {
@@ -163,13 +188,14 @@
           <h1>Yan Sun</h1>
         </header>
         <p>
-          Software Engineer at <a href="https://www.robinhood.com">Robinhood</a></br>
-          <a href="/yan-sun-resume.pdf">Resume</a> as of mid 2019<br>
-          Run code for <a id="email-button">email</a>: <span id="code-wrapper"><button id="run-button"><span>&#x25b6;&#xFE0E; RUN</span></button><button id="code-button"><code><span class="punctuation">`</span><span class="string">contact@</span><span class="punctuation">${</span><span class="code">window.location.hostname</span><span class="punctuation">}</span><span class="punctuation">`</span>
+          Engineering at <a class="robinhood" href="https://www.robinhood.com">Robinhood</a></br>
+          <a href="/yan-sun-resume.pdf">Resume</a> as of early 2023<br>
+          Run code for email: <span id="code-wrapper"><button id="run-button"><span>&#x25b6;&#xFE0E; RUN</span></button><button id="code-button"><code><span class="punctuation">`</span><span class="string">contact@</span><span class="punctuation">${</span><span class="code">window.location.hostname</span><span class="punctuation">}</span><span class="punctuation">`</span>
             </code></button></span>
         </p>
         <footer>
-          <span>Last updated: <a href="https://github.com/yans/yans.github.io/commit/master">May 2019</a></span>
+          <div>Here for <a class="party" target="_blank" href="https://kelly.and.yan.co">❤</a>?</div>
+          <div>Last updated: <a href="https://github.com/yans/yans.github.io/commit/master">March 2023</a></div>
         </footer>
       </div>
     </article>
