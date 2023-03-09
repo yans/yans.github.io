@@ -17,6 +17,7 @@
       }
 
       .content {
+        box-sizing: border-box;
         min-width: 769px;
         padding: 8em;
       }
@@ -300,9 +301,11 @@
                   <span class="string">`</span>
                 </span>
               </code>
-              <code id="code-result">
-                <span class="function">&gt;</span>&nbsp;
-                <span id="code-result-output" class="string"></span>
+              <code>
+                <span class="code-row" id="code-result">
+                  <span class="function">&gt;</span>&nbsp;
+                  <span id="code-result-output" class="string"></span>
+                </span>
               </code>
             </div>
           </div>
@@ -326,11 +329,13 @@
       const e = ['c','o','n','t','a','c','t','@','y','a','n','.','c','o'];
 
       let canCopy = false
-      navigator.permissions.query({ name: "clipboard-write" }).then((result) => {
-        if (result.state == "granted" || result.state == "prompt") {
-          canCopy = true
-        }
-      });
+      if (window.navigator && window.navigator.permissions) {
+        navigator.permissions.query({ name: "clipboard-write" }).then((result) => {
+          if (result.state == "granted" || result.state == "prompt") {
+            canCopy = true
+          }
+        });
+      }
 
       let hasRan = false
       const onClickRun = () => {
