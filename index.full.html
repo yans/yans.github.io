@@ -10,18 +10,22 @@
       /* LAYOUT */
 
       body {
+        padding: 0;
+        margin: 0;
+        border: 0;
         background-color: #FAFAFA;
       }
 
       .content {
         min-width: 769px;
-        margin: 8em 8em 8em 8em;
+        padding: 8em;
       }
 
       /* up to iPad */
       @media only screen and (max-width: 768px) {
         .content {
           min-width: 457px;
+          padding: 6em;
         }
       }
 
@@ -29,10 +33,9 @@
       @media only screen and (max-width: 456px) {
         .content {
           min-width: 320px;
-          margin: 1em 1em 1em 1em;
+          padding: 1em;
         }
       }
-
 
       /* TEXT */
 
@@ -87,13 +90,8 @@
         text-decoration-color: #AAA;
       }
 
-      a.robinhood {
-        color: rgb(0,200,5);
-        text-decoration-color: rgb(0,200,5);
-      }
-
       a.robinhood:hover {
-        color: rgb(0,180,5);
+        color: rgb(0,200,5);
         text-decoration-color: rgb(0,200,5);
       }
 
@@ -111,31 +109,73 @@
         background: none;
         border: none;
         display: inline-block;
-        font-size: 0.8em;
+        font-size: 1em;
+        line-height: 1;
         letter-spacing: -0.05em;
         margin: 0;
         padding: 0;
       }
 
-      button:hover {
+      button:hover:not([disabled]) {
         cursor: pointer;
       }
 
-      button:focus {
+      button:disabled {
         outline: none;
       }
 
+      #email-section {
+        display: flex;
+        flex-direction: row;
+        gap: 0.25em;
+      }
+
+      #code-window {
+       border-radius: 0.25em;
+       overflow: hidden;
+      }
+
+      #code-terminal {
+        display: flex;
+        flex-direction: column;
+        font-size: 1em;
+        height: 2em;
+        line-height: 1;
+        max-height: 2em;
+        min-height: 2em;
+        transition-duration: 250ms;
+        transition-timing-function: ease-out;
+      }
+
+      .code-terminal-scrolled {
+        transform: translateY(-100%);
+      }
+
       code {
-        border-radius: 0 0.25em 0.25em 0;
-        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        font-size: 1em;
+        line-height: 1;
+        min-height: 100%;
+        max-height: 100%;
+        background: #2c292d;
+        padding: 0.5em;
+        font-family: Monaco, monospace;
+        transition-property: height;
+        transition-duration: 250ms;
       }
 
       code .function {
-        color: #586e75;
+        color: #908e8f;
       }
 
       code .string {
-        color: #2aa198;
+        color: #ffd866;
+      }
+
+      code .keyword {
+        color: #78dce8;
       }
 
       code .punctuation {
@@ -143,41 +183,88 @@
       }
 
       code .code {
-        color: #657b83;
+        color: #fdf9f3;
+      }
+
+      code .green {
+        color: #a9dc76;
+      }
+
+      code .purple {
+        color: #78dce8;
+      }
+
+      code .orange {
+        color: #fc9867;
+      }
+
+      .code-row {
+        display: flex;
+      }
+
+      .code-tabs {
+        display: none;
+      }
+
+      /* up to iPhone XS Max */
+      @media only screen and (max-width: 456px) {
+        code {
+          flex-direction: column !important;
+        }
+        #code-terminal {
+          height: 4em !important;
+          line-height: 1 !important;
+          max-height: 4em !important;
+          min-height: 4em !important;
+        }
+        .code-tabs {
+          display: block !important;
+        }
+        #email-section {
+          flex-direction: column !important;
+        }
       }
 
       #run-button {
+        box-sizing: border-box;
+        font-size: 1rem;
+        line-height: 1;
         background-color: #DDD;
-        border-radius: 0.25em 0 0 0.25em;
+        border-radius: 0.25em;
         color: #111;
-        height: 28px;
-        margin-left: 0.25em;
-        padding: 0 0.25em 0 0.25em;
+        height: 2em;
+        padding: 0.5em;
       }
 
-      #code-button {
-        background-color: #fdf6e3;
-        border-radius: 0 0.25em 0.25em 0;
-        height: 28px;
-        max-height: 28px;
-        padding: 0 0.25em 0 0.25em;
+      #run-button:hover:not([disabled]) {
+        background-color: #999;
       }
 
-      #code-wrapper {
+      /* up to iPad */
+      @media only screen and (max-width: 768px) {
+        #run-button {
+          padding: 0.25em;
+        }
+      }
+
+      #loading-spinner {
+        width: 1em;
+        height: 1em;
+        border: 2px solid #FFF;
+        border-bottom-color: transparent;
+        border-radius: 50%;
         display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
       }
-      #code-wrapper:hover #run-button {
-        background-color: #AAA;
-        color: #fff;
-      }
-      #code-wrapper:hover #code-button {
-        background-color: #002b36;
-      }
-      #code-wrapper:hover code .code {
-        color: 839496;
-      }
-      #code-wrapper:hover code .function {
-        color: #93a1a1;
+
+      @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
       }
     </style>
   </head>
@@ -190,9 +277,37 @@
         <p>
           Engineering at <a class="robinhood" href="https://www.robinhood.com">Robinhood</a></br>
           <a href="/yan-sun-resume.pdf">Resume</a> as of early 2023<br>
-          Run code for email: <span id="code-wrapper"><button id="run-button"><span>&#x25b6;&#xFE0E; RUN</span></button><button id="code-button"><code><span class="punctuation">`</span><span class="string">contact@</span><span class="punctuation">${</span><span class="code">window.location.hostname</span><span class="punctuation">}</span><span class="punctuation">`</span>
-            </code></button></span>
+          Run code for email:
         </p>
+        <div id="email-section">
+          <div id="code-window">
+            <div id="code-terminal">
+              <code id="code-input">
+                <span class="code-row">
+                  <span class="function">&gt;</span>&nbsp;
+                  <span class="string">`contact@</span>
+                  <span class="punctuation">${</span>
+                </span>
+                <span class="code-row">
+                  <span class="code-tabs">&nbsp;&nbsp;</span>
+                  <span class="code-tabs">&nbsp;&nbsp;</span>
+                  <span class="keyword">window</span>
+                  <span class="code">.location.hostname</span>
+                </span>
+                <span class="code-row">
+                  <span class="code-tabs">&nbsp;&nbsp;</span>
+                  <span class="punctuation">}</span>
+                  <span class="string">`</span>
+                </span>
+              </code>
+              <code id="code-result">
+                <span class="function">&gt;</span>&nbsp;
+                <span id="code-result-output" class="string"></span>
+              </code>
+            </div>
+          </div>
+          <button id="run-button"><span>RUN &#9166;</span></button>
+        </div>
         <footer>
           <div>Here for <a class="party" target="_blank" href="https://kelly.and.yan.co">❤</a>?</div>
           <div>Last updated: <a href="https://github.com/yans/yans.github.io/commit/master">March 2023</a></div>
@@ -200,24 +315,121 @@
       </div>
     </article>
     <script type="text/javascript">
-      let b = document.getElementById('code-button');
-      let rb = document.getElementById('run-button');
-      let eb = document.getElementById('email-button');
-      let onClick = function(f) {
-        let e = `contact@${window.location.hostname}`;
-        let a = document.createElement('a');
-        a.appendChild(document.createTextNode(e));
-        a.setAttribute('href', `mailto:${e}`);
-        let ea = document.createElement('a');
-        ea.appendChild(document.createTextNode('email'));
-        ea.setAttribute('href', `mailto:${e}`);
-        b.parentNode.replaceChild(a, b);
-        eb.parentNode.replaceChild(ea, eb);
-        rb.remove();
+      const d = "0123456789qwertyuiopasdfghjklzxcvbnm!?></\a`~+*=@#$%".split('');
+      const sy = ['function', 'string', 'keyword', 'punctuation', 'code', 'green', 'purple', 'orange']
+      const t = document.getElementById('code-terminal');
+      const rb = document.getElementById('run-button');
+      // d9b652d60f16aad918dcb93000bf463a
+      const r = document.getElementById('code-result');
+      const ro = document.getElementById('code-result-output');
+      const c = ['d','9','b','6','5','2','d','6','0','f','1','6','a','a'];
+      const e = ['c','o','n','t','a','c','t','@','y','a','n','.','c','o'];
+
+      let canCopy = false
+      navigator.permissions.query({ name: "clipboard-write" }).then((result) => {
+        if (result.state == "granted" || result.state == "prompt") {
+          canCopy = true
+        }
+      });
+
+      let hasRan = false
+      const onClickRun = () => {
+        if (hasRan) {
+          return
+        }
+        hasRan = true
+
+        // show loading state
+        const loadingSpan = document.createElement('span');
+        loadingSpan.setAttribute('id', 'loading-spinner')
+        rb.replaceChild(loadingSpan, rb.firstChild)
+        rb.disabled = true
+
+        // populate the result with all the slots
+        c.forEach((l, i) => {
+          const s = document.createElement('span');
+          s.appendChild(document.createTextNode(l))
+          s.classList.add('code-email-output')
+          s.classList.add(rC(sy))
+          if (i === 0) {
+            s.classList.add('next-code-email-output')
+          }
+          r.appendChild(s)
+        })
+
+        // move it down
+        t.classList.add('code-terminal-scrolled')
+
+        let current_i = 0
+        const ii = window.setInterval(() => {
+          const slots = document.getElementsByClassName('code-email-output')
+          c.forEach((l, i) => {
+            if (i < current_i) {
+              return
+            }
+            // randomly flip the color and text of each letter
+            // for the next character, if random(0,1) <= easeOutCirc(i/len(c)-1)
+            const adjustedIndex = i - current_i;
+            if (i == current_i && Math.random() <= easeOutCirc(1 / (c.length - 1))) {
+              const partialText = e.slice(0, i + 1).join('')
+              const partialTextNode = document.createTextNode(partialText)
+              if (ro.firstChild) {
+                ro.replaceChild(partialTextNode, ro.firstChild)
+              } else {
+                ro.appendChild(partialTextNode)
+              }
+              current_i = current_i + 1
+              slots[adjustedIndex].remove()
+            } else {
+              const randomLetter = rC(d)
+              const slot = slots[adjustedIndex]
+              slot.replaceChild(document.createTextNode(randomLetter), slot.firstChild)
+              slot.removeAttribute('class')
+              slot.classList.add('code-email-output')
+              slot.classList.add(rC(sy))
+            }
+          })
+
+          if (current_i === e.length) {
+            window.clearInterval(ii)
+
+            // show done state
+            rb.removeEventListener('click', onClickRun);
+            if (canCopy) {
+              rb.replaceChild(
+                document.createTextNode('COPY'),
+                rb.firstChild)
+              rb.disabled = false
+              rb.addEventListener('click', onClickCopy)
+            } else {
+              rb.replaceChild(
+                document.createTextNode('DONE'),
+                rb.firstChild)
+            }
+          }
+        }, 100)
       };
-      b.addEventListener('click', onClick);
-      rb.addEventListener('click', onClick);
-      eb.addEventListener('click', onClick);
+
+      const onClickCopy = () => {
+          navigator.clipboard.writeText(e.join(''))
+
+          // show done state
+          rb.replaceChild(
+            document.createTextNode('COPIED'),
+            rb.firstChild)
+          rb.removeEventListener('click', onClickCopy);
+          rb.disabled = true
+      }
+
+      function rC(a) {
+        return a[Math.floor(Math.random() * a.length)];
+      }
+
+      function easeOutCirc(x) {
+        return Math.sqrt(1 - Math.pow(x - 1, 2));
+      }
+
+      rb.addEventListener('click', onClickRun);
     </script>
   </body>
 </html>
